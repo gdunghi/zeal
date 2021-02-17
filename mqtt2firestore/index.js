@@ -35,6 +35,7 @@ client.subscribe('msg/#')
 client.on('connect', () => {
     console.log('connected')
     logger.info('MQTT Broker connected')
+
     // publish sample data, remove this function on production
     setInterval(async () => {
         var cpu = os.cpu
@@ -55,7 +56,9 @@ client.on('message', function (topic, message) {
     // publish to firestore
     var json = message.toString();
     var jsonObject = JSON.parse(json)
-    db.collection('messages').doc('xavier_rz7').set(jsonObject)
+
+    // sample publish
+    //db.collection('messages').doc('xavier_rz7').set(jsonObject)
 
 })
 
