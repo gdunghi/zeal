@@ -10,5 +10,6 @@ Todo
  - [ ] MQTT to Cloud SQL
  - [ ] Database Schema for Cloud SQL
  - [ ] Data API
- - [ ] ...
-
+ - [ ] API Management
+ - [ ] Device Management
+ - [ ] Developer Console
