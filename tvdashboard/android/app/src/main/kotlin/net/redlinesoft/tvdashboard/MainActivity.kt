@@ -1,4 +1,4 @@
-package com.example.tvdashboard
+package net.redlinesoft.tvdashboard
 
 import io.flutter.embedding.android.FlutterActivity
 

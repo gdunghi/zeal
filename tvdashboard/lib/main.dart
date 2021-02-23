@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
@@ -38,32 +36,46 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool openDashboard = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[850],
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
+            Text(
+              "Zeal",
+              style: TextStyle(fontSize: 80.0),
+            ),
+            SizedBox(
+              height: 24,
+            ),
             SizedBox(
               width: 200,
-              child: RaisedButton(
-                child: Text("Enter Dashboard ID"),
+              // ignore: deprecated_member_use
+              child: RaisedButton.icon(
+                icon: Icon(Icons.open_in_browser),
+                label: Text("Open Dashboard"),
+                focusColor: Colors.blue[200],
                 onPressed: () {
-                  Toast.show("Enter Dashboard ID", context);
+                  Toast.show("Dashboard is not implement!", context);
                 },
               ),
             ),
             SizedBox(
               width: 200,
-              child: RaisedButton(
-                child: Text("Enter Demo Mode"),
+              // ignore: deprecated_member_use
+              child: RaisedButton.icon(
+                icon: Icon(Icons.info_outline),
+                label: Text("Demo Mode"),
+                focusColor: Colors.blue[200],
                 onPressed: () {
-                  Toast.show("Enter Demo Mode", context);
+                  Toast.show("Demo Mode", context);
                 },
               ),
-            )
+            ),
           ],
         ),
       ),

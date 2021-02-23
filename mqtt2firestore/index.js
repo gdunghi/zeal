@@ -59,7 +59,6 @@ client.on('message', function (topic, message) {
 
     // sample publish
     //db.collection('messages').doc('xavier_rz7').set(jsonObject)
-
 })
 
 client.on('error', function (error) {
