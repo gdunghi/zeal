@@ -7,8 +7,8 @@ Todo
 
  - [X] Mocup for TV UI
  - [X] MQTT to Cloud Firestore
- - [] MQTT to Cloud SQL
- - [] Database Schema for Cloud SQL
- - [] Data API
- - [] ...
+ - [ ] MQTT to Cloud SQL
+ - [ ] Database Schema for Cloud SQL
+ - [ ] Data API
+ - [ ] ...
 
