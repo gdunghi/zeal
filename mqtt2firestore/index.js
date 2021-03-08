@@ -2,7 +2,7 @@ const os = require('node-os-utils');
 const mqtt = require('mqtt')
 
 //var mqtt_host = '192.168.1.42'
-const mqtt_host = 'raspberrypi.local'
+const mqtt_host = 'test.mosquitto.org'
 const mqtt_port = 1883
 
 // init firestore
@@ -35,30 +35,23 @@ client.subscribe('msg/#')
 client.on('connect', () => {
     console.log('connected')
     logger.info('MQTT Broker connected')
-
-    // publish sample data, remove this function on production
-    setInterval(async () => {
-        var cpu = os.cpu
-        var mem = os.mem
-        var cpu_usage = await cpu.usage()
-        var mem_usage = await mem.used()
-        var timestamp = Date.now()
-        client.publish('msg/xavier/rz7', '{"cpu_usage":' + cpu_usage.toString() +
-            ', "mem_usage":' + mem_usage['usedMemMb'].toString() +
-            ', "mem_total":' + mem_usage['totalMemMb'].toString() +
-            ', "timestamp":' + timestamp + '}'
-        )
-    }, 5000)
 })
 
 client.on('message', function (topic, message) {
-    console.log('[INFO]', 'topic: ' + topic.toString() + ' message: ' + message.toString())
+    console.log('[INFO]', 'topic: ' + topic.toString() + ' message: ' + message.toString());
     // publish to firestore
     var json = message.toString();
-    var jsonObject = JSON.parse(json)
+    var jsonObject = JSON.parse(json);
+
+    var topicArray = topic.toString().split('/');
+    var msgType = topicArray[0];
+    var msgUserID = topicArray[1];
+    var msgDeviceID = topicArray[2];
+    var timeStamp = Math.round(+new Date() / 1000);
 
     // sample publish
-    //db.collection('messages').doc('xavier_rz7').set(jsonObject)
+    db.collection('messages').doc(msgUserID + '_' + msgDeviceID).set(jsonObject);
+    db.collection('messages').doc(msgUserID + '_' + msgDeviceID).collection('log').doc(timeStamp.toString()).set(jsonObject);
 })
 
 client.on('error', function (error) {
